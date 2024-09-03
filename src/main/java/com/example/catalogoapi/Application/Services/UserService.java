@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.catalogoapi.Domain.Common.ApiResult;
 import com.example.catalogoapi.Domain.Entity.Usuario;
 import com.example.catalogoapi.Domain.Interfaces.IUsuarioRepository;
 
@@ -16,11 +17,22 @@ public class UserService {
         this.repository = repository;
     }
 
-    public List<Usuario> GetAll() {
-        return this.repository.findAll();
+    public ApiResult<List<Usuario>> GetAll() {
+
+        var users = this.repository.findAll();
+        if (users.isEmpty()) {
+            return ApiResult.notFound();
+        }
+
+        return ApiResult.success(users);
     }
 
-    public Usuario GetById(int id) {
-        return this.repository.findById(id).orElse(null);
+    public ApiResult<Usuario> GetById(int id) {
+        var user = this.repository.findById(id);
+        if (user.isEmpty()) {
+            return ApiResult.notFound();
+        }
+
+        return ApiResult.success(user.get());
     }
 }

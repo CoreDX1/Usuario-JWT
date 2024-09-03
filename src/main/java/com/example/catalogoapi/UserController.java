@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import com.example.catalogoapi.Application.Services.UserService;
+import com.example.catalogoapi.Domain.Common.ApiResult;
 import com.example.catalogoapi.Domain.Entity.Usuario;
 
 @RestController
@@ -20,12 +21,14 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<Usuario>> getUsers() {
-        return ResponseEntity.ok(this.service.GetAll());
+    public ResponseEntity<ApiResult<List<Usuario>>> getAllUsers() {
+        var result = this.service.GetAll();
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<Usuario> getUserById(@PathVariable int id) {
-        return ResponseEntity.ok(this.service.GetById(id));
+    public ResponseEntity<ApiResult<Usuario>> getUserById(@PathVariable int id) {
+        var result = this.service.GetById(id);
+        return ResponseEntity.ok(result);
     }
 }
