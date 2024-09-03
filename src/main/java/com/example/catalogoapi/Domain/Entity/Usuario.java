@@ -1,28 +1,58 @@
 package com.example.catalogoapi.Domain.Entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
 
-    private String nome;
-    private String email;
+    @Id
+    private int id;
 
-    public Usuario(String nome, String email) {
-        this.nome = nome;
-        this.email = email;
+    private String nombre;
+    private String email;
+    private String hash_password;
+
+    public Usuario() {
     }
 
-    public String getNome() {
-        return nome;
+    public Usuario(String nombre, String email, String hash_password) {
+        this.nombre = nombre;
+        this.email = email;
+        this.hash_password = hash_password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getHash_password() {
+        return hash_password;
+    }
+
+    public void setHash_password(String hash_password) {
+        this.hash_password = hash_password;
     }
 }
